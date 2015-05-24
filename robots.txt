@@ -1,0 +1,23 @@
+user-agent: *
+disallow: /images/
+disallow: /css/
+disallow: /js/
+disallow: /fonts/
+disallow: /system/
+disallow: /application/confiq/
+disallow: /application/controllers/
+disallow: /application/errors/
+disallow: /application/helpers/
+disallow: /application/hooks/
+disallow: /application/models/
+disallow: /application/libraries/
+disallow: /application/language/
+disallow: /application/pdf_courrier/
+disallow: /application/third_party/
+disallow: /application/views/membres.php
+
+User-agent: Googlebot-Image
+Disallow:
+Allow: /*
+
+Sitemap: http://www.kukkea.com/sitemap.xml

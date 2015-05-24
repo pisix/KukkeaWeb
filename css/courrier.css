@@ -1,0 +1,9 @@
+.invoice-table{ padding:25px; font-family:Arial, Helvetica, sans-serif; font-size:14px;}
+.invoice{ border-right:#333333 solid 1px; border-top:#333333 solid 1px; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:18px;}
+.invoice tr td{ border-left:#333333 solid 1px; border-bottom:#333333 solid 1px; padding:8px;}
+.invoice tr { clear:both;}
+.invoice tr td h1{ margin:0px; padding:0px; font-size:30px;}
+.invoice tr td h3{ margin:0px; padding:0px;}
+.border-l-none{ border-left:none!important;}
+.border-b-none{ border-bottom:none!important;}
+.borcer-b-none td{ border-left:#333333 solid 0px; border-bottom:#333333 solid 0px!important;}
