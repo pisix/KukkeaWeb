@@ -1,7 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Signup extends CI_Controller {
 
-    public $user = "";
 
     private $client_google;
     private $client_google_id;
@@ -9,17 +8,25 @@ class Signup extends CI_Controller {
     private $redirect_google_uri;
     private $simple_google_api_key;
 
-    public function __construct() {
+    public function __construct(){
         parent::__construct();
         $this->load->library('Minify');
+        //Google Auth
+        /*require_once APPPATH ."libraries/google-api-php-client-master/src/Google/autoload.php";
+        include_once APPPATH . "libraries/google-api-php-client-master/src/Google/Client.php";
+        include_once APPPATH . "libraries/google-api-php-client-master/src/Google/Service/Oauth2.php";
+        $this->client_google_id = '716926404823-r5eps3ia49r3like7v7h4ggqc889r6e1.apps.googleusercontent.com';
+        $this->client_google_secret = '7YCwM0tzxPl6P_cAkBb_zCYe';
+        $this->redirect_google_uri = 'http://localhost/KukkeaWeb/signup/google';
+        $this->simple_google_api_key = 'AIzaSyCTSPE2VNZc2ZYjK2G6COleyWy1SjA9egI';*/
 
-        // Load facebook library and pass associative array which contains appId and secret key
-        $this->load->library('facebook', array('appId' => '1399451620382920', 'secret' => '94aedf0b7ba871472e61d7541007c570'));
 
-        // Get user's login information
-        $this->user = $this->facebook->getUser();
+
+
+        //$this->output->cache(15);
+
+
     }
-
     public function index()
     {
         $this->load->view('includes/header');
@@ -34,175 +41,6 @@ class Signup extends CI_Controller {
     {
         $data['pays']= $this->pays_model->read();
         $this->load->view('signup_pro',$data);
-    }
-
-    function login()
-    {
-        if($this->session->userdata('login')|| $this->session->userdata('logged') || $this->user)
-        {
-            // Facebook User Infos
-            $data['user_profile'] = $this->facebook->api('/me/');
-            // Get logout url of facebook
-            $data['logout_url'] = $this->facebook->getLogoutUrl(array('next' => base_url() . 'index.php/signup/logout'));
-            // Send data to profile page
-            //$this->load->view('profile', $data);    
-
-            redirect('signup/membres');
-        }
-
-       // Store users facebook login url
-        $data['login_url'] = $this->facebook->getLoginUrl();
-
-        $this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
-        $this->form_validation->set_rules('motdepasse','Mot de passe','trim|required|xss_clean');
-
-        if($this->form_validation->run())
-        {
-            if($this->signup_model->check_id($this->input->post('email'), $this->input->post('motdepasse')) &&  $this->signup_model->check_confirm_inscription($this->input->post('email')))
-            {
-
-                /*get number announce post by user*/
-              //  $id_user=$this->utilisateur_model->get_id_user_by_email($this->input->post('email'));
-              //  $number_annonce=$this->annonce_model->get_number_annonce_user_by_id($id_user);
-                /*end get*/
-
-              /*  if($this->signup_model->check_confirm_inscription_courrier($this->input->post('email')) || $number_annonce<2){*/
-
-                    $dataUser=$this->signup_model->get_nom_prenom_user_by_email($this->input->post('email'));
-
-                    if($dataUser!= null)
-                    {
-                        $data=array('login'=>$this->input->post('email'),
-                            'logged'=>true);
-
-                    }
-
-                    //Variable de log
-                    $data_u=array(
-                        'DERNIERECONNEXION'=>date('Y-m-d H:i:s', now())
-                    );
-                    $this->signup_model->update_last_connexion($this->input->post('email'),$data_u);
-                    //end logging connexion time
-
-
-                    $this->session->set_userdata($data);
-
-                    /* Redirection previous page after authentication */
-                   /* $this->session->set_userdata('refered_from', $_SERVER['HTTP_REFERER']);*/
-                   /* redirect($this->session->userdata('refered_from'));*/
-                    /*if($this->session->userdata('page_url'))
-                        redirect($this->session->userdata('page_url'));
-                    else*/
-                        redirect('signup/membres');
-
-                    //redirect('signup/membres');
-               /* }
-                else
-                {
-                    $this->load->view('includes/header');
-                    $this->load->view('includes/menu_page_no_log');
-                    $this->load->view('code_confirmation');
-                    $this->load->view('includes/footer');
-                }*/
-
-            }
-            else
-            {                
-                $data['error']='Mauvais identifiants';
-                $data['titre']='Connexion';
-                // $data['fblogin'] = $this->facebook->get_login_url();
-
-
-                $this->load->view('includes/header');
-                $this->load->view('includes/menu_page_no_log');
-                $this->load->view('login',$data);
-                $this->load->view('includes/footer');
-
-            }
-        }
-        else
-        {
-
-            $data['titre']='Connexion';
-            //Google Auth
-            // Store values in variables from project created in Google Developer Console
-          /* */
-
-            // Create Client Request to access Google API
-
-            $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
-            $this->load->view('login',$data);
-            $this->load->view('includes/footer');
-
-        }
-
-    }
-
-    function logout()
-    {
-        session_destroy(); // destruction de la session facebook
-        $this->session->unset_userdata('login');
-        $this->session->unset_userdata('logged');
-        redirect(site_url());
-    }
-
-    function membres()
-    {
-    /* pour quoi revérifié ce qui est déjà fait dans l'action login (car c'est par où tout passe en ce qui concerne l'auth)
-        if(!$this->session->userdata('login') || !$this->session->userdata('logged') || !$this->user)
-        {
-            redirect('signup/login');
-        }
-        else*/
-
-        // CAS DES UTILISATEURS CONNECTE VIA FACEBOOK A TRAITER
-        // bug, connexion via facebook par le login de notgabs, mais page membre = L franky
-        // renseignement des informations de l'utilisateur connecté via le formulaire
-        $idUser=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
-        log_message('info','On recupere id user succes');
-
-
-        $data['iduser']=encryptor('encrypt', $idUser);
-        log_message('info','cryptage id user');
-
-
-        $id_user_connecte=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
-        log_message('info','lon recupere les info de l\'user connecte');
-
-
-        $data['user_connecte_info']=$this->utilisateur_model->get_user_info_by_id($id_user_connecte);
-        log_message('info','on set l"array pour affichage à la vue');
-
-
-        $data['number_annonce_user_connecte']=$this->annonce_model->get_number_annonce_user_by_id($id_user_connecte);
-        $data['average_avis']=round($this->avis_model->get_avg_avis($idUser),1);
-        $data['nombre_avis']=$this->avis_model->get_number_avis($idUser);
-        $data['statut_confirm_by_phone']='true';
-
-        if($this->signup_model->check_confirm_inscription_phone($this->session->userdata('login'))){
-            $data['statut_confirm_by_phone']='true';
-        }else{
-            $data['statut_confirm_by_phone']='false';
-        }
-        log_message('info','On verifie que son numéro est bien actif');
-
-        $data['toutes_mes_annonces']=$this->annonce_model->get_all_annonce_by_user($id_user_connecte);
-        log_message('info','On recupere toutes les annonce');
-
-        $data['toutes_mes_annonces_transport']=$this->annonce_model->get_all_annonce_transport_by_user($id_user_connecte);
-        log_message('info','On recupere toutes les annonce de transport');
-
-        $data['toutes_mes_annonces_envoi']=$this->annonce_model->get_all_annonce_envoi_by_user($id_user_connecte);
-        log_message('info','On recupere toutes les annonce de transport');
-
-
-        $data['alertes']='';
-        $data['titre']='Zone Reservé au membres';
-        $this->load->view('includes/header');
-        $this->load->view('includes/menu_page_log',$data);
-        $this->load->view('membres',$data);
-        $this->load->view('includes/footer');
     }
 
     public function adduser()
@@ -577,6 +415,103 @@ class Signup extends CI_Controller {
 
         }
     }
+    public $user=null;
+
+    function login()
+    {
+        if($this->session->userdata('login')|| $this->session->userdata('logged') )
+        {
+            redirect('signup/membres');
+        }
+
+        // Facebook Login Url
+        $data['login_url'] = $this->facebook->getLoginUrl();
+
+        $this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
+        $this->form_validation->set_rules('motdepasse','Mot de passe','trim|required|xss_clean');
+
+        if($this->form_validation->run())
+        {
+            if($this->signup_model->check_id($this->input->post('email'), $this->input->post('motdepasse')) &&  $this->signup_model->check_confirm_inscription($this->input->post('email')))
+            {
+
+                /*get number announce post by user*/
+              //  $id_user=$this->utilisateur_model->get_id_user_by_email($this->input->post('email'));
+              //  $number_annonce=$this->annonce_model->get_number_annonce_user_by_id($id_user);
+                /*end get*/
+
+              /*  if($this->signup_model->check_confirm_inscription_courrier($this->input->post('email')) || $number_annonce<2){*/
+
+                    $dataUser=$this->signup_model->get_nom_prenom_user_by_email($this->input->post('email'));
+
+                    if($dataUser!= null)
+                    {
+                        $data=array('login'=>$this->input->post('email'),
+                            'logged'=>true);
+
+                    }
+
+                    //Variable de log
+                    $data_u=array(
+                        'DERNIERECONNEXION'=>date('Y-m-d H:i:s', now())
+                    );
+                    $this->signup_model->update_last_connexion($this->input->post('email'),$data_u);
+                    //end logging connexion time
+
+
+                    $this->session->set_userdata($data);
+
+                    /* Redirection previous page after authentication */
+                   /* $this->session->set_userdata('refered_from', $_SERVER['HTTP_REFERER']);*/
+                   /* redirect($this->session->userdata('refered_from'));*/
+                    /*if($this->session->userdata('page_url'))
+                        redirect($this->session->userdata('page_url'));
+                    else*/
+                        redirect('signup/membres');
+
+                    //redirect('signup/membres');
+               /* }
+                else
+                {
+                    $this->load->view('includes/header');
+                    $this->load->view('includes/menu_page_no_log');
+                    $this->load->view('code_confirmation');
+                    $this->load->view('includes/footer');
+                }*/
+
+            }
+            else
+            {
+                $data['error']='Mauvais identifiants';
+                $data['titre']='Connexion';
+                // $data['fblogin'] = $this->facebook->get_login_url();
+
+
+                $this->load->view('includes/header');
+                $this->load->view('includes/menu_page_no_log');
+                $this->load->view('login',$data);
+                $this->load->view('includes/footer');
+
+            }
+        }
+        else
+        {
+
+            $data['titre']='Connexion';
+            //Google Auth
+            // Store values in variables from project created in Google Developer Console
+          /* */
+
+            // Create Client Request to access Google API
+
+            $this->load->view('includes/header');
+            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('login',$data);
+            $this->load->view('includes/footer');
+
+        }
+
+    }
 
     function google()
     {
@@ -617,6 +552,76 @@ class Signup extends CI_Controller {
         }
     }
 
+    function facebook()
+    {
+
+    }
+
+    function logout()
+    {
+        $this->session->unset_userdata('login');
+        $this->session->unset_userdata('logged');
+        redirect(site_url());
+    }
+
+    function membres()
+    {
+        if(!$this->session->userdata('login') || !$this->session->userdata('logged'))
+        {
+            redirect('signup/login');
+        }
+        else
+        {
+
+
+
+            $idUser=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
+            log_message('info','On recupere id user succes');
+
+
+            $data['iduser']=encryptor('encrypt', $idUser);
+            log_message('info','cryptage id user');
+
+
+            $id_user_connecte=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
+            log_message('info','lon recupere les info de l\'user connecte');
+
+
+            $data['user_connecte_info']=$this->utilisateur_model->get_user_info_by_id($id_user_connecte);
+            log_message('info','on set l"array pour affichage à la vue');
+
+
+            $data['number_annonce_user_connecte']=$this->annonce_model->get_number_annonce_user_by_id($id_user_connecte);
+            $data['average_avis']=round($this->avis_model->get_avg_avis($idUser),1);
+            $data['nombre_avis']=$this->avis_model->get_number_avis($idUser);
+            $data['statut_confirm_by_phone']='true';
+
+            if($this->signup_model->check_confirm_inscription_phone($this->session->userdata('login'))){
+                $data['statut_confirm_by_phone']='true';
+            }else{
+                $data['statut_confirm_by_phone']='false';
+            }
+            log_message('info','On verifie que son numéro est bien actif');
+
+            $data['toutes_mes_annonces']=$this->annonce_model->get_all_annonce_by_user($id_user_connecte);
+            log_message('info','On recupere toutes les annonce');
+
+            $data['toutes_mes_annonces_transport']=$this->annonce_model->get_all_annonce_transport_by_user($id_user_connecte);
+            log_message('info','On recupere toutes les annonce de transport');
+
+            $data['toutes_mes_annonces_envoi']=$this->annonce_model->get_all_annonce_envoi_by_user($id_user_connecte);
+            log_message('info','On recupere toutes les annonce de transport');
+
+
+            $data['alertes']='';
+            $data['titre']='Zone Reservé au membres';
+            $this->load->view('includes/header');
+            $this->load->view('includes/menu_page_log',$data);
+            $this->load->view('membres',$data);
+            $this->load->view('includes/footer');
+
+        }
+    }
 
     //fonction de callback pour checker l'email
 
@@ -731,6 +736,11 @@ class Signup extends CI_Controller {
         $this->load->view('includes/footer');
     }
 
+    public function fblogin() {
+        $login_url = $this->facebook->get_login_url();
+
+    }
+
     public function send_mail($from,$to,$subject, $message)
     {
 
@@ -835,5 +845,8 @@ class Signup extends CI_Controller {
 
         return true;
     }
+
+
+
 
 }

@@ -80,6 +80,7 @@
                         <div>
                               <!--<a  class="no-decoration" href="<?php echo site_url('account/forgotpassword')?>">> Mot de passe oublié ?</a>-->
                               <a href="#"  id="forgotpassword-form-trigger" class="no-decoration"> Mot de passe oublié ?</a>
+                              <?php echo "<a href='$login_url'>Connexion avec Faceboook</a>"; ?>
                               <?php echo form_close(); ?>
                                <div id="forgotpassword" style="display: none">
                                    <?php
