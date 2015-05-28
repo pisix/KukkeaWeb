@@ -149,61 +149,62 @@ class Signup extends CI_Controller {
 
     function membres()
     {
-    /* pour quoi revérifié ce qui est déjà fait dans l'action login (car c'est par où tout passe en ce qui concerne l'auth)
-        if(!$this->session->userdata('login') || !$this->session->userdata('logged') || !$this->user)
-        {
-            redirect('signup/login');
-        }
-        else*/
 
-        // CAS DES UTILISATEURS CONNECTE VIA FACEBOOK A TRAITER
-        // bug, connexion via facebook par le login de notgabs, mais page membre = L franky
-        // renseignement des informations de l'utilisateur connecté via le formulaire
-        $idUser=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
-        log_message('info','On recupere id user succes');
+        if(!$this->user){
+            $idUser=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
+            log_message('info','On recupere id user succes');
+
+            $data['iduser']=encryptor('encrypt', $idUser);
+            log_message('info','cryptage id user');
 
 
-        $data['iduser']=encryptor('encrypt', $idUser);
-        log_message('info','cryptage id user');
+            $id_user_connecte=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
+            log_message('info','lon recupere les info de l\'user connecte');
 
 
-        $id_user_connecte=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
-        log_message('info','lon recupere les info de l\'user connecte');
+            $data['user_connecte_info']=$this->utilisateur_model->get_user_info_by_id($id_user_connecte);
+            log_message('info','on set l"array pour affichage à la vue');
 
 
-        $data['user_connecte_info']=$this->utilisateur_model->get_user_info_by_id($id_user_connecte);
-        log_message('info','on set l"array pour affichage à la vue');
-
-
-        $data['number_annonce_user_connecte']=$this->annonce_model->get_number_annonce_user_by_id($id_user_connecte);
-        $data['average_avis']=round($this->avis_model->get_avg_avis($idUser),1);
-        $data['nombre_avis']=$this->avis_model->get_number_avis($idUser);
-        $data['statut_confirm_by_phone']='true';
-
-        if($this->signup_model->check_confirm_inscription_phone($this->session->userdata('login'))){
+            $data['number_annonce_user_connecte']=$this->annonce_model->get_number_annonce_user_by_id($id_user_connecte);
+            $data['average_avis']=round($this->avis_model->get_avg_avis($idUser),1);
+            $data['nombre_avis']=$this->avis_model->get_number_avis($idUser);
             $data['statut_confirm_by_phone']='true';
-        }else{
-            $data['statut_confirm_by_phone']='false';
+
+            if($this->signup_model->check_confirm_inscription_phone($this->session->userdata('login'))){
+                $data['statut_confirm_by_phone']='true';
+            }else{
+                $data['statut_confirm_by_phone']='false';
+            }
+            log_message('info','On verifie que son numéro est bien actif');
+
+            $data['toutes_mes_annonces']=$this->annonce_model->get_all_annonce_by_user($id_user_connecte);
+            log_message('info','On recupere toutes les annonce');
+
+            $data['toutes_mes_annonces_transport']=$this->annonce_model->get_all_annonce_transport_by_user($id_user_connecte);
+            log_message('info','On recupere toutes les annonce de transport');
+
+            $data['toutes_mes_annonces_envoi']=$this->annonce_model->get_all_annonce_envoi_by_user($id_user_connecte);
+            log_message('info','On recupere toutes les annonce de transport');
+
+            $data['facebook_login'] = false;
+            $data['alertes']='';
+            $data['titre']='Zone Reservé au membres';
         }
-        log_message('info','On verifie que son numéro est bien actif');
-
-        $data['toutes_mes_annonces']=$this->annonce_model->get_all_annonce_by_user($id_user_connecte);
-        log_message('info','On recupere toutes les annonce');
-
-        $data['toutes_mes_annonces_transport']=$this->annonce_model->get_all_annonce_transport_by_user($id_user_connecte);
-        log_message('info','On recupere toutes les annonce de transport');
-
-        $data['toutes_mes_annonces_envoi']=$this->annonce_model->get_all_annonce_envoi_by_user($id_user_connecte);
-        log_message('info','On recupere toutes les annonce de transport');
+        else{ // if the user is logged with facebook
+            $data['facebook_login'] = true;
+            $data['user_profile'] = $this->facebook->api('/me/');
+            // Get logout url of facebook
+            $data['logout_url'] = $this->facebook->getLogoutUrl(array('next' => base_url() . 'index.php/signup/logout'));
+        }
 
 
-        $data['alertes']='';
-        $data['titre']='Zone Reservé au membres';
         $this->load->view('includes/header');
         $this->load->view('includes/menu_page_log',$data);
         $this->load->view('membres',$data);
         $this->load->view('includes/footer');
     }
+        
 
     public function adduser()
 
