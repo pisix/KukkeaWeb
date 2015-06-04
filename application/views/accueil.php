@@ -2,24 +2,18 @@
 <div class=" ">
 
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
 <!-- Banner -->
 <section id="banner">
-
-    <!--
-        ".inner" is set up as an inline-block so it automatically expands
-        in both directions to fit whatever's inside it. This means it won't
-        automatically wrap lines, so be sure to use line breaks where
-        appropriate (<br />).
-    -->
     <div class="inner">
-
         <header>
             <h2>Kukkea</h2>
         </header>
@@ -33,16 +27,12 @@
             </ul>
         </footer>
                <br/>
-
          <p><span style="font-weight: bold; color: #83D3C9"><?php echo $nombre_utilisateurs;?></span> personnes utilisent Kukkea pour expedier des colis</p>
-
     </div>
 
 </section>
 <section class="wrapper style1 container special">
-
     <div class="row">
-
         <div class=" col-xs-8 col-md-4 col-sm-3 col-lg-4">
             <section>
                 <span class="icon featured fa-plane"></span>
@@ -53,47 +43,36 @@
                     <a href="<?php echo site_url('/help/howitworks');?>">En savoir plus sur l'envoi de colis pour expediteur</a>
                 </p>
             </section>
-
         </div>
         <div class="clearfix visible-xs-block"></div>
         <div class="col-xs-8 col-md-4 col-sm-3 col-lg-4">
-
             <section>
                 <span class="icon featured fa-money"></span>
                 <header>
                     <h3>Voyageurs:
                         Réduisez vos frais de voyages</h3>
                 </header>
-                <p>                    <a href="<?php echo site_url('/help/howitworks#transporteur');?>">En savoir plus sur l'envoi de colis pour voyageur</a>
+                <p><a href="<?php echo site_url('/help/howitworks#transporteur');?>">En savoir plus sur l'envoi de colis pour voyageur</a>
                 </p>
             </section>
-
         </div>
         <div class="clearfix visible-xs-block"></div>
         <div class="col-xs-8 col-md-4 col-sm-3 col-lg-4">
-
             <section>
                 <span class="icon featured fa-car"></span>
                 <header>
                     <h3>Kukkea C'est:
                         La Confiance , La Serénite, l'Economie et la Rapidité</h4></h3>
                 </header>
-                <p>                     <a href="<?php echo site_url('/help/confident');?>">En savoir plus sur la confiance et la serénité.</a></p>
+                <p><a href="<?php echo site_url('/help/confident');?>">En savoir plus sur la confiance et la serénité.</a></p>
             </section>
-
         </div>
     </div>
 </section>
 
-
 <!-- Main -->
 <article id="main" style="margin-top:-90px ">
 
-    <!-- One -->
-
-    <!-- Two -->
-
-    <!-- Three -->
     <section class="wrapper style3 container special visible-md-block visible-sm-block visible-lg-block" style="width: 700px; height: 400px" >
         <header class="major" style="margin-top: -80px">
             <h2>KUKKEA</h2>

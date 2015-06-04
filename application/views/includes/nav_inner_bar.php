@@ -5,41 +5,26 @@
     <h1 id="logo"><a href="<?php echo site_url();?>" style="margin-top: 40px" class="no-decoration"><img src="<?php echo base_url('images/site/logo2.png')?>" height="25px" width="25px"/>Kukkea<span>.com</span></a></h1>
     <nav id="nav">
         <ul>
-
-            <!--<li><a id="modal_trigger" href="#modallogin">Connexion</a></li>
-            <li><a id="modal_trigger2" href="#modalregister">Inscription</a></li>-->
-
-            <li><a href="<?=site_url('signup/login'); ?>" >Connexion</a></li>
-            <li><a href="<?=site_url('signup'); ?>" >Inscription</a></li>
-                <li class="submenu">
-                <a class="" href="">Aide</a>
-                    <ul>
-                        <li><a href="<?php echo site_url('help/creercompte')?>">Creer mon compte ?</a></li>
-                        <li><a href="<?php echo site_url('help/expediercolis')?>">Expedier un colis ?</a></li>
-                        <li><a href="<?php echo site_url('help/transportercolis')?>">Transporter un colis ?</a></li>
-                        <li><a href="<?php echo site_url('help/motdepasseoublie')?>">Mot de passe oublié ?</a></li>
-                        <li><a href="<?php echo site_url('help/contact')?>">Contact</a></li>
-                        <!--<li class="submenu">
-                            <a href="">Submenu</a>
-                            <ul>
-                                <li><a href="#">Dolore Sed</a></li>
-                                <li><a href="#">Consequat</a></li>
-                                <li><a href="#">Lorem Magna</a></li>
-                                <li><a href="#">Sed Magna</a></li>
-                                <li><a href="#">Ipsum Nisl</a></li>
-                            </ul>
-                        </li>-->
-                    </ul>
-            </li>
-            <li><a href="<?=site_url('annonce/newannonce'); ?>" class="button special">Publier votre annonce</a></li>
-
+          <li><a href="<?=site_url('auth/login'); ?>" >Connexion</a></li>
+          <li><a href="<?=site_url('signup'); ?>" >Inscription</a></li>
+              <li class="submenu">
+              <a class="" href="">Aide</a>
+              <ul>
+                  <li><a href="<?php echo site_url('help/creercompte')?>">Creer mon compte ?</a></li>
+                  <li><a href="<?php echo site_url('help/expediercolis')?>">Expedier un colis ?</a></li>
+                  <li><a href="<?php echo site_url('help/transportercolis')?>">Transporter un colis ?</a></li>
+                  <li><a href="<?php echo site_url('help/motdepasseoublie')?>">Mot de passe oublié ?</a></li>
+                  <li><a href="<?php echo site_url('help/contact')?>">Contact</a></li>
+              </ul>
+          </li>
+          <li><a href="<?=site_url('annonce/newannonce'); ?>" class="button special">Publier votre annonce</a></li>
         </ul>
     </nav>
 </header>
         <div class="container">
             <div id="modallogin" class="popupContainer" style="display:none;">
                 <header class="popupHeader" style="display:none;">
-                    <span class="header_title">Login</span>
+                  <span class="header_title">Login</span>
                 </header>
                   <section class="popupBody">
                       <div class="user_login" style="display: block">
