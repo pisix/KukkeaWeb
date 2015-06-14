@@ -1,4 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Signup extends CI_Controller {
 
@@ -37,7 +38,7 @@ class Signup extends CI_Controller {
 
     public function adduser(){
         if($this->session->userdata('login')|| $this->session->userdata('logged')){
-            redirect('signup/membres');
+            redirect('auth/profile');
         }
         // validation des champs du formulaire
         $this->form_validation->set_rules('civilite','Civilite','trim|required|max_length[50]|xss_clean');
@@ -67,6 +68,7 @@ class Signup extends CI_Controller {
         $config['encrypt_name']=true;
         $this->load->library('upload',$config);
         $this->upload->initialize($config);
+        
         //Creation de l'utilisateur
         if($this->input->server('REQUEST_METHOD') === 'POST'){
                 if($this->form_validation->run()){

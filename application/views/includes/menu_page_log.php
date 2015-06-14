@@ -1,5 +1,4 @@
 <!-- Header -->
-<?php if(!$facebook_login): ?>
     <header id="header" class="skel-layers-fixed">
         <h1 id="logo" style="margin-left: -20px"><a href="<?php echo site_url();?>" style="margin-top: 40px" class="no-decoration"><img src="<?php echo base_url('images/site/logo.png')?>" height="20px" width="20px"/>Kukkea<span>.com</span></a>&nbsp;&nbsp;</a></h1>
         <nav id="nav">
@@ -29,7 +28,7 @@
                             <ul >
                                 <li><a href="<?php echo site_url().'account/editprofil/'.$iduser?>"><i class="glyphicon glyphicon-cog"></i> Profil</a></li>
                                 <li class="divider"></li>
-                                <li><a href="<?=site_url('signup/logout'); ?>"><i class="glyphicon glyphicon-lock"></i> Se déconnecter</a>
+                                <li><a href="<?=site_url('auth/logout'); ?>"><i class="glyphicon glyphicon-lock"></i> Se déconnecter</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li><a href="<?php echo site_url('help/contact');?>"><i class="glyphicon glyphicon-hand-up"></i> Aide</a></li>
@@ -50,7 +49,4 @@
             </ul>
         </nav>
     </header>
-<?php else: ?>
-    <header><nav>The header</nav></header>
-<?php endif; ?>
 <br/>

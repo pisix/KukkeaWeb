@@ -39,7 +39,7 @@ class annonce extends  CI_Controller {
         else
         {
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log',$this->data);
+            $this->load->view('includes/navbar_view',$this->data);
             $this->load->view('find_annonce',$this->data);
         }
 
@@ -402,7 +402,7 @@ class annonce extends  CI_Controller {
         {
             /*$this->data['all_annonce_premium']=$this->annonce_model->get_all_annonce_premium();*/
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log',$this->data);
+            $this->load->view('includes/navbar_view',$this->data);
             $this->load->view('envoi',$this->data);
             $this->load->view('includes/footer');
         }
@@ -494,7 +494,7 @@ class annonce extends  CI_Controller {
         {
             $this->data['all_annonce_premium']=$this->annonce_model->get_all_annonce_premium();
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log',$this->data);
+            $this->load->view('includes/navbar_view',$this->data);
             $this->load->view('transport',$this->data);
             $this->load->view('includes/footer');
 
@@ -570,7 +570,7 @@ class annonce extends  CI_Controller {
 
 
                 $this->load->view('includes/header',$this->data);
-                $this->load->view('includes/menu_page_no_log',$this->data);
+                $this->load->view('includes/navbar_view',$this->data);
               //  $this->load->view('includes/second_nav_inner_bar',$this->data);
                 $this->load->view('detail_annonce',$this->data);
                 $this->load->view('includes/footer');
@@ -643,7 +643,7 @@ class annonce extends  CI_Controller {
         {
             //$this->data['all_annonce_premium']=$this->annonce_model->get_all_annonce_premium();
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
             $this->load->view('result_find',$this->data);
 
@@ -765,7 +765,7 @@ class annonce extends  CI_Controller {
             $this->data['result_find_user']=$this->annonce_model->find_by_ville_depart_and_ville_arrivee_user($villedepart,$villearrivee,$categorie,$datestart);
 
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
             $this->load->view('result_find',$this->data);
             $this->load->view('includes/footer');
@@ -823,7 +823,7 @@ class annonce extends  CI_Controller {
                     $this->data['rows']=$this->annonce_model->get_annonce_by_id(encryptor('decrypt',$this->uri->segment(3)));
 
                     $this->load->view('includes/header');
-                    $this->load->view('includes/menu_page_no_log');
+                    $this->load->view('includes/navbar_view');
                    //$this->load->view('includes/second_nav_inner_bar');
                     $this->load->view('envoyeremail',$this->data);
                     $this->load->view('includes/footer');
@@ -852,7 +852,7 @@ class annonce extends  CI_Controller {
                     $this->data['rows']=$this->annonce_model->get_annonce_by_id(encryptor('decrypt',$this->uri->segment(3)));
 
                     $this->load->view('includes/header');
-                    $this->load->view('includes/menu_page_no_log');
+                    $this->load->view('includes/navbar_view');
                     //$this->load->view('includes/second_nav_inner_bar');
                     $this->load->view('envoyeremail',$this->data);
                     $this->load->view('includes/footer');
@@ -884,7 +884,7 @@ class annonce extends  CI_Controller {
             else{
                 $this->data['rows']=$this->annonce_model->get_annonce_by_id(encryptor('decrypt',$this->uri->segment(3)));
                 $this->load->view('includes/header');
-                $this->load->view('includes/menu_page_no_log');
+                $this->load->view('includes/navbar_view');
                //$this->load->view('includes/second_nav_inner_bar');
                 $this->load->view('envoyeremail',$this->data);
                 $this->load->view('includes/footer');
@@ -1029,7 +1029,7 @@ class annonce extends  CI_Controller {
 
 
                /* $this->load->view('includes/header');
-                $this->load->view('includes/menu_page_no_log');
+                $this->load->view('includes/navbar_view');
                //$this->load->view('includes/second_nav_inner_bar');
                 $this->load->view('send_email',$this->data);
                 $this->load->view('includes/footer');*/

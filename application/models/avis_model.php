@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Franky
- * Date: 26/08/2014
- * / Time: 19:54
-/ */
+
 class Avis_model  extends CI_Model{
 
     function __construct()
@@ -35,24 +30,28 @@ class Avis_model  extends CI_Model{
         $this->db->insert('avis',$data);
     }
 
-    function get_avg_avis($iduser)
-    {
+    function get_avg_avis($iduser, $type_connexion){
         $this->db->select_avg('NOTE','NOTE');
         $this->db->from('avis');
-
-        $this->db->join('utilisateur', 'avis.NUMUSER = utilisateur.NUMUSER');
-
-        $this->db->where('avis.NUMUSER',$iduser);
+        if($type_connexion == "N"){
+            $this->db->join('utilisateur', 'avis.NUMUSER = utilisateur.NUMUSER');
+            $this->db->where('avis.NUMUSER',$iduser);
+        }else{
+            $this->db->join('utilisateursfbk', 'avis.NUMFBKUSER = utilisateursfbk.NUMFBKUSER');
+            $this->db->where('avis.NUMFBKUSER',$iduser);
+        }
 
         $q= $this->db->get();
         return $q->row()->NOTE;
     }
-    function get_number_avis($iduser)
-    {
-
+    function get_number_avis($iduser, $type_connexion){
         $this->db->select('COUNT(avis.NUMAVIS)')
             ->from('avis');
-        $this->db->where('avis.NUMUSER',$iduser);
+        if($type_connexion == "N"){
+            $this->db->where('avis.NUMUSER',$iduser);
+        }else{
+            $this->db->where('avis.NUMFBKUSER',$iduser);  
+        }
         $q=$this->db->count_all_results();
         return $q;
 

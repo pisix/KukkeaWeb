@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_controller{
 
@@ -41,19 +42,7 @@ class Auth extends CI_controller{
     *	THIS VALIDES THE USER LOGIN CREDENTIALS
     **/
     function validate(){
-
-    	// TODO
-    	//- When a user is logged using fbk, create him in the database
-    	//- then retrieve data to build his profile page
-    	//- use the logout url of fbk to build the logout link in this occasion
-
         if($this->session->userdata('login')|| $this->session->userdata('logged') || $this->user){
-            // Facebook User Infos
-            $data['user_profile'] = $this->facebook->api('/me/');
-            // Get logout url of facebook
-            $data['logout_url'] = $this->facebook->getLogoutUrl(array('next' => base_url() . 'index.php/auth/logout'));
-            // Send data to profile page  
-
             redirect('auth/profile');
         }
 
@@ -81,7 +70,7 @@ class Auth extends CI_controller{
             //end logging connexion time
 
             $this->session->set_userdata($data);
-            redirect('signup/membres');
+            redirect('auth/profile');
         }
         else{                
             $data['error']='Mauvais identifiants';
@@ -100,49 +89,38 @@ class Auth extends CI_controller{
 	**/
     function profile(){
 
-        if(!$this->user){
+        if(!$this->user){ // logged in using normal account
+
             $idUser=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
             log_message('info','On recupere id user succes');
 
-            $data['iduser']=encryptor('encrypt', $idUser);
-            log_message('info','cryptage id user');
+            $user_model = "utilisateur_model";
+            $type_connexion = "N";
+            $data = $this->getUserInfo($idUser,$user_model, $type_connexion);
 
-            $id_user_connecte=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
-            log_message('info','lon recupere les info de l\'user connecte');
-
-            $data['user_connecte_info']=$this->utilisateur_model->get_user_info_by_id($id_user_connecte);
-            log_message('info','on set l"array pour affichage à la vue');
-
-            $data['number_annonce_user_connecte']=$this->annonce_model->get_number_annonce_user_by_id($id_user_connecte);
-            $data['average_avis']=round($this->avis_model->get_avg_avis($idUser),1);
-            $data['nombre_avis']=$this->avis_model->get_number_avis($idUser);
-            $data['statut_confirm_by_phone']='true';
-
-            if($this->signup_model->check_confirm_inscription_phone($this->session->userdata('login'))){
-                $data['statut_confirm_by_phone']='true';
-            }else{
-                $data['statut_confirm_by_phone']='false';
-            }
-            log_message('info','On verifie que son numéro est bien actif');
-
-            $data['toutes_mes_annonces']=$this->annonce_model->get_all_annonce_by_user($id_user_connecte);
-            log_message('info','On recupere toutes les annonce');
-
-            $data['toutes_mes_annonces_transport']=$this->annonce_model->get_all_annonce_transport_by_user($id_user_connecte);
-            log_message('info','On recupere toutes les annonce de transport');
-
-            $data['toutes_mes_annonces_envoi']=$this->annonce_model->get_all_annonce_envoi_by_user($id_user_connecte);
-            log_message('info','On recupere toutes les annonce de transport');
-
-            $data['facebook_login'] = false;
+          //  $data['facebook_login'] = false;
             $data['alertes']='';
             $data['titre']='Zone Reservé au membres';
+            $data["NUMUSER"] = "NUMUSER"; // variable to display the user id in the page ($r->$NUMUSER)
         }
-        else{ // if the user is logged with facebook
-            $data['facebook_login'] = true;
-            $data['user_profile'] = $this->facebook->api('/me/');
-            // Get logout url of facebook
-            $data['logout_url'] = $this->facebook->getLogoutUrl(array('next' => base_url() . 'index.php/auth/logout'));
+        else{ // Logged in using facebook
+
+            $first_name = $this->facebook->api('/me/')['first_name'];
+            $last_name = $this->facebook->api('/me/')['last_name']; 
+            $gender = $this->facebook->api('/me/')['gender'];
+            $fbk_user_id = $this->facebook->api('/me/')['id'];
+            $fbk_user_id = strtolower($first_name.$last_name.$fbk_user_id); // building a unique fbk user id
+
+            // If the user is logged using facebook and does'nt already exists in the facebook user table, we create him
+            if(!$this->utilisateur_facebook_model->user_exists($fbk_user_id)){
+                $id_photo = ($gender=="male")?3:4;//3 = boy avatar and = girl avatar 
+                $this->utilisateur_facebook_model->add_user($first_name, $last_name, $fbk_user_id, $id_photo);
+            }
+
+            $user_model = "utilisateur_facebook_model";
+            $type_connexion = "F";
+            $data = $this->getUserInfo($fbk_user_id, $user_model, $type_connexion);
+            $data["NUMUSER"] = "NUMFBKUSER"; // variable to display the fbk user id in the page ($r->$NUMFBKUSER)
         }
 
         $this->load->view('includes/header');
@@ -150,4 +128,44 @@ class Auth extends CI_controller{
         $this->load->view('member_view',$data);
         $this->load->view('includes/footer');
     }
+
+    /**
+    *   Gets user infos according to the called model (normal user or fbk user) by using his id
+    */
+    public function getUserInfo($id_user_connecte, $user_model, $type_connexion){
+        $idUser=$id_user_connecte;
+        log_message('info','On recupere id user succes');
+
+        $data['iduser']=encryptor('encrypt', $idUser);
+        log_message('info','cryptage id user');
+
+        log_message('info','lon recupere les info de l\'user connecte');
+
+        $data['user_connecte_info']=$this->$user_model->get_user_info_by_id($id_user_connecte);
+        log_message('info','on set l"array pour affichage à la vue');
+
+        $data['number_annonce_user_connecte']=$this->annonce_model->get_number_annonce_user_by_id($id_user_connecte, $type_connexion);
+        $data['average_avis']=round($this->avis_model->get_avg_avis($idUser, $type_connexion),1);
+        $data['nombre_avis']=$this->avis_model->get_number_avis($idUser, $type_connexion);
+        $data['statut_confirm_by_phone']='true';
+
+        if($this->signup_model->check_confirm_inscription_phone($this->session->userdata('login'))){
+            $data['statut_confirm_by_phone']='true';
+        }else{
+            $data['statut_confirm_by_phone']='false';
+        }
+        log_message('info','On verifie que son numéro est bien actif');
+
+        $data['toutes_mes_annonces']=$this->annonce_model->get_all_annonce_by_user($id_user_connecte, $type_connexion);
+        log_message('info','On recupere toutes les annonce');
+
+        $data['toutes_mes_annonces_transport']=$this->annonce_model->get_all_annonce_transport_by_user($id_user_connecte, $type_connexion);
+        log_message('info','On recupere toutes les annonce de transport');
+
+        $data['toutes_mes_annonces_envoi']=$this->annonce_model->get_all_annonce_envoi_by_user($id_user_connecte, $type_connexion, $user_model);
+        log_message('info','On recupere toutes les annonce de transport');
+
+        return $data;
+    }
+
 }

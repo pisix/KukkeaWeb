@@ -1102,3 +1102,213 @@ DEBUG - 2015-06-05 00:03:50 --> File loaded: application/views/member_view.php
 DEBUG - 2015-06-05 00:03:50 --> File loaded: application/views/includes/footer.php
 DEBUG - 2015-06-05 00:03:50 --> Final output sent to browser
 DEBUG - 2015-06-05 00:03:50 --> Total execution time: 0.6533
+DEBUG - 2015-06-05 00:23:04 --> Config Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Hooks Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Utf8 Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> UTF-8 Support Enabled
+DEBUG - 2015-06-05 00:23:04 --> URI Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Router Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Output Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Security Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Input Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Global POST and COOKIE data sanitized
+DEBUG - 2015-06-05 00:23:04 --> Language Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Loader Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Helper loaded: form_helper
+DEBUG - 2015-06-05 00:23:04 --> Helper loaded: url_helper
+DEBUG - 2015-06-05 00:23:04 --> Helper loaded: text_helper
+DEBUG - 2015-06-05 00:23:04 --> Helper loaded: date_helper
+DEBUG - 2015-06-05 00:23:04 --> Helper loaded: string_helper
+DEBUG - 2015-06-05 00:23:04 --> Helper loaded: file_helper
+DEBUG - 2015-06-05 00:23:04 --> Helper loaded: dompdf_helper
+DEBUG - 2015-06-05 00:23:04 --> Helper loaded: customhelper_helper
+DEBUG - 2015-06-05 00:23:04 --> Database Driver Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Form Validation Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Session Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Session routines successfully run
+DEBUG - 2015-06-05 00:23:04 --> Email Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Encrypt Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Upload Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Pagination Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Google Maps Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Config file loaded: application/config/nexmo.php
+DEBUG - 2015-06-05 00:23:04 --> cURL Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> User Agent Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Controller Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Config file loaded: application/config/minify.php
+DEBUG - 2015-06-05 00:23:04 --> Database Driver Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Form Validation Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Session Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Session routines successfully run
+DEBUG - 2015-06-05 00:23:04 --> Email Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Encrypt Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Upload Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Pagination Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Google Maps Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> cURL Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> User Agent Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:04 --> Controller Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: html_helper
+DEBUG - 2015-06-05 00:23:05 --> File loaded: application/views/includes/header.php
+ERROR - 2015-06-05 00:23:05 --> Severity: Notice  --> Undefined variable: facebook_login C:\xampp\htdocs\projects\KukkeaWeb\application\views\includes\menu_page_log.php 2
+DEBUG - 2015-06-05 00:23:05 --> File loaded: application/views/includes/menu_page_log.php
+DEBUG - 2015-06-05 00:23:05 --> File loaded: application/views/includes/analyticstracking.php
+DEBUG - 2015-06-05 00:23:05 --> File loaded: application/views/404.php
+DEBUG - 2015-06-05 00:23:05 --> File loaded: application/views/includes/footer.php
+DEBUG - 2015-06-05 00:23:05 --> Final output sent to browser
+DEBUG - 2015-06-05 00:23:05 --> Total execution time: 1.0394
+DEBUG - 2015-06-05 00:23:05 --> Config Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Hooks Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Utf8 Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> UTF-8 Support Enabled
+DEBUG - 2015-06-05 00:23:05 --> URI Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Router Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Output Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Security Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Input Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Global POST and COOKIE data sanitized
+DEBUG - 2015-06-05 00:23:05 --> Language Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Loader Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: form_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: url_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: text_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: date_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: string_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: file_helper
+DEBUG - 2015-06-05 00:23:05 --> Config Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Hooks Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Utf8 Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> UTF-8 Support Enabled
+DEBUG - 2015-06-05 00:23:05 --> URI Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Router Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Output Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Security Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Input Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Global POST and COOKIE data sanitized
+DEBUG - 2015-06-05 00:23:05 --> Language Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Loader Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: form_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: url_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: text_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: date_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: string_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: file_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: dompdf_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: customhelper_helper
+DEBUG - 2015-06-05 00:23:05 --> Database Driver Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: dompdf_helper
+DEBUG - 2015-06-05 00:23:05 --> Helper loaded: customhelper_helper
+DEBUG - 2015-06-05 00:23:05 --> Database Driver Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Form Validation Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Session Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Session routines successfully run
+DEBUG - 2015-06-05 00:23:05 --> Email Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Encrypt Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Upload Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Pagination Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Form Validation Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Session Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Session routines successfully run
+DEBUG - 2015-06-05 00:23:05 --> Email Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Encrypt Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Upload Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Pagination Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Google Maps Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Config file loaded: application/config/nexmo.php
+DEBUG - 2015-06-05 00:23:05 --> cURL Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> User Agent Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Controller Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Google Maps Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Config file loaded: application/config/nexmo.php
+DEBUG - 2015-06-05 00:23:05 --> cURL Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> User Agent Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Controller Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Config file loaded: application/config/minify.php
+DEBUG - 2015-06-05 00:23:05 --> Config file loaded: application/config/minify.php
+DEBUG - 2015-06-05 00:23:05 --> Database Driver Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Form Validation Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Session Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Session routines successfully run
+DEBUG - 2015-06-05 00:23:05 --> Email Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Encrypt Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Upload Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Pagination Class Initialized
+DEBUG - 2015-06-05 00:23:05 --> Google Maps Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> cURL Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> User Agent Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Controller Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Helper loaded: html_helper
+DEBUG - 2015-06-05 00:23:06 --> File loaded: application/views/includes/header.php
+ERROR - 2015-06-05 00:23:06 --> Severity: Notice  --> Undefined variable: facebook_login C:\xampp\htdocs\projects\KukkeaWeb\application\views\includes\menu_page_log.php 2
+DEBUG - 2015-06-05 00:23:06 --> File loaded: application/views/includes/menu_page_log.php
+DEBUG - 2015-06-05 00:23:06 --> File loaded: application/views/includes/analyticstracking.php
+DEBUG - 2015-06-05 00:23:06 --> File loaded: application/views/404.php
+DEBUG - 2015-06-05 00:23:06 --> File loaded: application/views/includes/footer.php
+DEBUG - 2015-06-05 00:23:06 --> Final output sent to browser
+DEBUG - 2015-06-05 00:23:06 --> Total execution time: 0.7539
+DEBUG - 2015-06-05 00:23:06 --> Database Driver Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Form Validation Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Session Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Session routines successfully run
+DEBUG - 2015-06-05 00:23:06 --> Email Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Encrypt Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Upload Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Pagination Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Google Maps Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> cURL Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> User Agent Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Model Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Controller Class Initialized
+DEBUG - 2015-06-05 00:23:06 --> Helper loaded: html_helper
+DEBUG - 2015-06-05 00:23:06 --> File loaded: application/views/includes/header.php
+ERROR - 2015-06-05 00:23:06 --> Severity: Notice  --> Undefined variable: facebook_login C:\xampp\htdocs\projects\KukkeaWeb\application\views\includes\menu_page_log.php 2
+DEBUG - 2015-06-05 00:23:06 --> File loaded: application/views/includes/menu_page_log.php
+DEBUG - 2015-06-05 00:23:06 --> File loaded: application/views/includes/analyticstracking.php
+DEBUG - 2015-06-05 00:23:06 --> File loaded: application/views/404.php
+DEBUG - 2015-06-05 00:23:06 --> File loaded: application/views/includes/footer.php
+DEBUG - 2015-06-05 00:23:06 --> Final output sent to browser
+DEBUG - 2015-06-05 00:23:06 --> Total execution time: 1.2562
