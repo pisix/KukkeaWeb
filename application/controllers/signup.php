@@ -72,9 +72,9 @@ class Signup extends CI_Controller {
         //Creation de l'utilisateur
         if($this->input->server('REQUEST_METHOD') === 'POST'){
                 if($this->form_validation->run()){
-                    /*$g_recaptcha_response=trim($this->input->post('g-recaptcha-response'));
+                    $g_recaptcha_response=trim($this->input->post('g-recaptcha-response'));
                     log_message('info',"g-recaptcha-response: ".$g_recaptcha_response);
-                    if($this->getResponse($g_recaptcha_response)){*/
+                    if($this->getResponse($g_recaptcha_response)){
                         $data['test']='form_validation';
                         $villederesidence=$this->input->post('villederesidence');
                         $paysderesidence='';
@@ -190,7 +190,7 @@ class Signup extends CI_Controller {
                             redirect('signup');
                         }
                     }
-                  /* else
+                   else
                         {
                             $data['erreurcaptcha']='Nous ne parvenons pas à verifier votre identité. Assurez-vous d\'avoir coché le captcha en fin de formulaire';
                             $this->load->view('includes/header',$data);
@@ -198,7 +198,7 @@ class Signup extends CI_Controller {
                             $this->load->view('signup_view',$data);
                             $this->load->view('includes/footer');
                         }
-                }*/
+                }
                 else
                 {
                     $data['titre']='Inscription';
