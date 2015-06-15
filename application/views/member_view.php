@@ -1,8 +1,5 @@
 ﻿﻿<br/><br/>
 <div class="container-fluid">
-
-    <?php if(!$facebook_login): ?>
-
         <h5><i style="font-weight: bold">Annonces en ligne</i> :<b><?php echo $number_annonce_user_connecte;?></b></h5>
         <div class="col-md-3">
             <?php foreach($user_connecte_info as $u):?>
@@ -10,14 +7,14 @@
                 <span style=" color:#666666"><?php echo $u->NOMUSER;?> <?php echo $u->PRENOMUSER;?></span><br/>
                 <a href="<?php echo site_url().'account/editprofil/'.$iduser?>" class="no-decoration"><i class="glyphicon glyphicon-cog"></i> Modifier mon profil</a><br/>
                <!-- <?php if ($u->VERIFNUMTEL !=0):?>
-                    <a href="#" onclick="checkPhoneNumber('<?php echo $u->TELUSER?>','<?php  encryptor('encrypt',$u->NUMUSER)?>')" class="no-decoration" STYLE="color: red"><i class="glyphicon glyphicon-phone"></i> Vérifiez mon numéro<br/>de téléphone</a><br/>
+                    <a href="#" onclick="checkPhoneNumber('<?php echo $u->TELUSER?>','<?php  encryptor('encrypt',$u->$NUMUSER)?>')" class="no-decoration" STYLE="color: red"><i class="glyphicon glyphicon-phone"></i> Vérifiez mon numéro<br/>de téléphone</a><br/>
                 <?php endif;?>-->
 
                 <hr class="bs-docs-separator">
                 <i class="glyphicon glyphicon-time blue-small"></i> Inscrit le <?php echo  strftime("%d %B %Y",strtotime($u->DATEINSCRIPTION)); ?><br/>
                 <hr class="bs-docs-separator">
                 <?php foreach($user_connecte_info as $u):?>
-                    <a class="no-decoration" href="<?php echo site_url('account/profil/'.encryptor('encrypt',$u->NUMUSER))?>">
+                    <a class="no-decoration" href="<?php echo site_url('account/profil/'.encryptor('encrypt',$u->$NUMUSER))?>">
                                 <span class="label label-info">
                                         <?php echo $nombre_avis; ?> Avis recu(s)
                                    </span>
@@ -45,7 +42,7 @@
                     <span class="label">Vous n'avez recu aucun avis</span>
                 <?php endif;?>
                 <hr class="bs-docs-separator">
-                <a style="text-decoration: none;" href="<?=site_url('signup/logout'); ?>"><i class="glyphicon glyphicon-log-out"></i>Déconnexion</a>
+                <a style="text-decoration: none;" href="<?=site_url('auth/logout'); ?>"><i class="glyphicon glyphicon-log-out"></i>Déconnexion</a>
                 <hr class="bs-docs-separator">
                 <?php if ($u->VERIFNUMTEL !=0 || $u->VERIFNUMTEL !=null ):?>
                     <?php  echo "<script type='text/javascript'>
@@ -105,7 +102,7 @@
                     <?php echo form_close();?>
                     <div class="modal-footer">
                         <?php foreach($user_connecte_info as $u):?>
-                            <a href="<?php echo site_url('account/generatecode?tel='.encryptor('encrypt',$u->TELUSER).'&user='.encryptor('encrypt',$u->NUMUSER))?>" style="margin-right: 300px" class=" button special no-decoration">Regenerer le code</a>
+                            <a href="<?php echo site_url('account/generatecode?tel='.encryptor('encrypt',$u->TELUSER).'&user='.encryptor('encrypt',$u->$NUMUSER))?>" style="margin-right: 300px" class=" button special no-decoration">Regenerer le code</a>
                         <?php endforeach;?>
                     </div>
                 </div>
@@ -364,10 +361,6 @@
             <!-- /.modal-dialog -->
         </div>
         </div>
-
-   <?php else: ?>
-    <div>You logged in using facebook <a href="<?php echo $logout_url; ?>">Logout</a></div>
-   <?php endif; ?> <!-- End standard login -->
 
 </div>
 <script src="<?=base_url('js/jquery.js'); ?>"></script>

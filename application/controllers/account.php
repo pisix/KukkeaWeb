@@ -306,7 +306,7 @@ class Account extends CI_Controller {
                 $this->data['success_email']="True";
                 $this->data['mail_user']=$email;
                 $this->load->view('includes/header');
-                $this->load->view('includes/menu_page_no_log');
+                $this->load->view('includes/navbar_view');
                //$this->load->view('includes/second_nav_inner_bar');
                // $this->load->view('includes/finder');
 
@@ -317,7 +317,7 @@ class Account extends CI_Controller {
             {
                 $this->data['error_email']="l'adresse email <b>".$email."</b> n'existe pas";
                 $this->load->view('includes/header');
-                $this->load->view('includes/menu_page_no_log');
+                $this->load->view('includes/navbar_view');
                //$this->load->view('includes/second_nav_inner_bar');
                 //$this->load->view('includes/finder');
                 $this->load->view('forgotpassword',$this->data);
@@ -329,7 +329,7 @@ class Account extends CI_Controller {
         }else{
 
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
             //$this->load->view('includes/finder');
             $this->load->view('forgotpassword');
@@ -368,7 +368,7 @@ class Account extends CI_Controller {
             {
                 $this->data['error_get_password']="Erreur recupération mot de passe";
                 $this->load->view('includes/header');
-                $this->load->view('includes/menu_page_no_log');
+                $this->load->view('includes/navbar_view');
                //$this->load->view('includes/second_nav_inner_bar');
                 $this->load->view('gp_form',$this->data);
                 $this->load->view('includes/footer');
@@ -395,7 +395,7 @@ class Account extends CI_Controller {
 
                     $this->data['success_get_password']="Congratulations!";
                     $this->load->view('includes/header');
-                    $this->load->view('includes/menu_page_no_log');
+                    $this->load->view('includes/navbar_view');
                    //$this->load->view('includes/second_nav_inner_bar');
                     $this->load->view('gp_form',$this->data);
                     $this->load->view('includes/footer');
@@ -405,7 +405,7 @@ class Account extends CI_Controller {
         }else
         {
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
             $this->load->view('gp_form');
             $this->load->view('includes/footer');
@@ -432,7 +432,7 @@ class Account extends CI_Controller {
 
            // $this->data['user_info']=$this->utilisateur_model->get_user_info_by_id($idUser);
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
           //  $this->load->view('includes/second_nav_inner_bar',$this->data);
             $this->load->view('includes/finder');
             $this->load->view('404',$this->data);
@@ -487,11 +487,11 @@ class Account extends CI_Controller {
             $this->session->set_userdata($datasession);
 
             $this->session->set_flashdata('bienvenue', 'Inscription Terminée');
-            redirect('signup/membres');
+            redirect('auth/profile');
 
             /*$this->data['success_confirm_inscription']="Congratulations!";
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
             $this->load->view('confirm_inscription',$this->data);
             $this->load->view('includes/footer');*/
@@ -515,7 +515,7 @@ class Account extends CI_Controller {
                 {
                     $this->data['code_error']="Ce code de confirmation est erroné";
                     $this->load->view('includes/header');
-                    $this->load->view('includes/menu_page_no_log');
+                    $this->load->view('includes/navbar_view');
                     //$this->load->view('includes/second_nav_inner_bar');
                     $this->data['echec_confirm_inscription_courrier']="Ce code de confirmation est erroné";
                     $this->form_validation->set_message('codeconfirmation','Ce code de confirmation est erroné');
@@ -541,7 +541,7 @@ class Account extends CI_Controller {
                     echo "Congratulations!";
                     $this->data['success_confirm_inscription_courrier']="Congratulations!";
                     $this->load->view('includes/header');
-                    $this->load->view('includes/menu_page_no_log',$this->data);
+                    $this->load->view('includes/navbar_view',$this->data);
                    //$this->load->view('includes/second_nav_inner_bar');
                     $this->load->view('confirm_final_inscription',$this->data);
                     $this->load->view('includes/footer');
@@ -550,7 +550,7 @@ class Account extends CI_Controller {
             else
             {
                 $this->load->view('includes/header');
-                $this->load->view('includes/menu_page_no_log');
+                $this->load->view('includes/navbar_view');
                 //$this->load->view('includes/second_nav_inner_bar');
                 $this->load->view('code_confirmation');
                 $this->load->view('includes/footer');
@@ -569,7 +569,7 @@ class Account extends CI_Controller {
             $this->data['user_info']=$this->utilisateur_model->get_user_info_by_id($idUser);
 
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log',$this->data);
+            $this->load->view('includes/navbar_view',$this->data);
             //$this->load->view('includes/second_nav_inner_bar');
             $this->load->view('code_confirmation',$this->data);
             $this->load->view('includes/footer');
@@ -599,7 +599,7 @@ class Account extends CI_Controller {
                 if($query->num_rows()<=0)
                 {
                     $this->session->set_flashdata('telephoneko1', 'Le code que vous avez reneigné n\'est pas celui que nous vous avons envoyé');
-                    redirect('signup/membres');
+                    redirect('auth/profile');
                 }
                 else
                 {
@@ -610,7 +610,7 @@ class Account extends CI_Controller {
                     $this->db->where('EMAILUSER', $this->session->userdata('login'));
                     $this->db->update('utilisateur',$this->data);
                     $this->session->set_flashdata('telephoneok', 'Votre numéro de télephone est certifié');
-                    redirect('signup/membres');
+                    redirect('auth/profile');
                 }
 
 
@@ -619,19 +619,19 @@ class Account extends CI_Controller {
             {
                 /*
                 $this->load->view('includes/header');
-                $this->load->view('includes/menu_page_no_log');
+                $this->load->view('includes/navbar_view');
                 //$this->load->view('includes/second_nav_inner_bar');
                 $this->load->view('code_confirmation');
                 $this->load->view('includes/footer');
                 */
                 $this->session->set_flashdata('telephoneko2', 'Le code doit avoir 4 caractères numériques ex:1234');
-                redirect('signup/membres');
+                redirect('auth/profile');
             }
 
         }
         else
         {
-            redirect('signup/membres');
+            redirect('auth/profile');
         }
 
     }
@@ -730,7 +730,7 @@ class Account extends CI_Controller {
         {
 
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log',$this->data);
+            $this->load->view('includes/navbar_view',$this->data);
           //  $this->load->view('includes/second_nav_inner_bar',$this->data);
            // $this->load->view('includes/finder');
             $this->load->view('profil',$this->data);
@@ -791,7 +791,7 @@ class Account extends CI_Controller {
         $this->send_sms($code,$telephone);
 
         $this->session->set_flashdata('regenerationok', 'Vous venez de recevoir un nouveau code suite à votre demande.');
-        redirect('signup/membres');
+        redirect('auth/profile');
 
     }
 

@@ -108,7 +108,16 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('annonce_model','signup_model','pays_model','utilisateur_model','photo_model','ville_model','avis_model');
+$autoload['model'] = array(
+						'annonce_model',
+						'signup_model',
+						'pays_model',
+						'utilisateur_model',
+						'photo_model',
+						'ville_model',
+						'avis_model',
+						'utilisateur_facebook_model' // using alias to load user facebook model
+					);
 
 
 /* End of file autoload.php */

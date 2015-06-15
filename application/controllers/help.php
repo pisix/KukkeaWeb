@@ -39,7 +39,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
             //$this->load->view('includes/second_nav_inner_bar');
             //  $this->load->view('includes/finder');
             $this->load->view('help');
@@ -102,7 +102,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
            // $this->load->view('includes/finder');
             $this->load->view('contact_us',$data);
@@ -131,7 +131,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
             //$this->load->view('includes/finder');
             $this->load->view('legal-mentions');
@@ -159,7 +159,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
            // $this->load->view('includes/finder');
             $this->load->view('security-recommendations');
@@ -188,7 +188,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
            // $this->load->view('includes/finder');
             $this->load->view('cgu');
@@ -217,7 +217,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
            // $this->load->view('includes/finder');
             $this->load->view('about');
@@ -246,7 +246,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
            // $this->load->view('includes/finder');
             $this->load->view('how-it-works');
@@ -277,8 +277,8 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
+            $this->load->view('includes/navbar_view');
             //$this->load->view('includes/second_nav_inner_bar');
          //   $this->load->view('includes/finder');
             $this->load->view('experience');
@@ -308,7 +308,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
           //  $this->load->view('includes/finder');
             $this->load->view('confident');
@@ -338,7 +338,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
           //  $this->load->view('includes/finder');
             $this->load->view('questions');
@@ -367,7 +367,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
            //$this->load->view('includes/second_nav_inner_bar');
           //  $this->load->view('includes/finder');
             $this->load->view('regle-de-transport');
@@ -397,7 +397,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
             //$this->load->view('includes/second_nav_inner_bar');
             //  $this->load->view('includes/finder');
             $this->load->view('creer-compte');
@@ -427,7 +427,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
             //$this->load->view('includes/second_nav_inner_bar');
             //  $this->load->view('includes/finder');
             $this->load->view('regle-de-transport');
@@ -456,7 +456,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
             //$this->load->view('includes/second_nav_inner_bar');
             //  $this->load->view('includes/finder');
             $this->load->view('regle-de-transport');
@@ -485,7 +485,7 @@ class Help extends  CI_Controller {
         }
         else{
             $this->load->view('includes/header');
-            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('includes/navbar_view');
             //$this->load->view('includes/second_nav_inner_bar');
             //  $this->load->view('includes/finder');
             $this->load->view('regle-de-transport');

@@ -1,9 +1,6 @@
-<?php
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Signup extends CI_Controller {
 
-    public $user = "";
 
     private $client_google;
     private $client_google_id;
@@ -11,24 +8,34 @@ class Signup extends CI_Controller {
     private $redirect_google_uri;
     private $simple_google_api_key;
 
-    public function __construct() {
+    public function __construct(){
         parent::__construct();
         $this->load->library('Minify');
+        //Google Auth
+        /*require_once APPPATH ."libraries/google-api-php-client-master/src/Google/autoload.php";
+        include_once APPPATH . "libraries/google-api-php-client-master/src/Google/Client.php";
+        include_once APPPATH . "libraries/google-api-php-client-master/src/Google/Service/Oauth2.php";
+        $this->client_google_id = '716926404823-r5eps3ia49r3like7v7h4ggqc889r6e1.apps.googleusercontent.com';
+        $this->client_google_secret = '7YCwM0tzxPl6P_cAkBb_zCYe';
+        $this->redirect_google_uri = 'http://localhost/KukkeaWeb/signup/google';
+        $this->simple_google_api_key = 'AIzaSyCTSPE2VNZc2ZYjK2G6COleyWy1SjA9egI';*/
 
-        // Load facebook library and pass associative array which contains appId and secret key
-        $this->load->library('facebook', array('appId' => '1399451620382920', 'secret' => '94aedf0b7ba871472e61d7541007c570'));
 
-        // Get user's login information
-        $this->user = $this->facebook->getUser();
+
+
+        //$this->output->cache(15);
+
+
     }
-
     public function index()
     {
         $this->load->view('includes/header');
-        $this->load->view('includes/navbar_view');
-        $this->load->view('signup_view');
+        $this->load->view('includes/menu_page_no_log');
+        $this->load->view('signup');
         $this->load->view('includes/footer');
+
     }
+
 
     public function pro()
     {
@@ -36,11 +43,16 @@ class Signup extends CI_Controller {
         $this->load->view('signup_pro',$data);
     }
 
-    public function adduser(){
-        if($this->session->userdata('login')|| $this->session->userdata('logged')){
-            redirect('auth/profile');
+    public function adduser()
+
+    {
+        if($this->session->userdata('login')|| $this->session->userdata('logged') )
+        {
+            redirect('signup/membres');
         }
+
         // validation des champs du formulaire
+
         $this->form_validation->set_rules('civilite','Civilite','trim|required|max_length[50]|xss_clean');
         // $this->form_validation->set_rules('pseudo','Pseudo','trim|required|min_length[3]|max_length[50]|xss_clean|callback_check_pseudo');
         $this->form_validation->set_rules('nom','Nom','trim|required|min_length[3]|max_length[50]|xss_clean');
@@ -51,39 +63,54 @@ class Signup extends CI_Controller {
         $this->form_validation->set_rules('motdepasse2','Mot de passe','trim|required|min_length[6]|xss_clean');
         $this->form_validation->set_rules('telephone','Téléphone','trim|required|numeric|xss_clean');
         $this->form_validation->set_rules('indicatiftelephonique','Indicatif téléphonique','trim|required|numeric|xss_clean');
+
         // $this->form_validation->set_rules('pays','Pays de résidence','trim|required|min_length[3]|xss_clean');
         $this->form_validation->set_rules('villederesidence','Ville de résidence','trim|required|min_length[3]|xss_clean');
         $this->form_validation->set_rules('codepostal','Code postal','trim|min_length[5]|numeric|xss_clean');
         $this->form_validation->set_rules('adresse','Code postal','trim|min_length[3]|xss_clean');
         $this->form_validation->set_rules('agree','Condition d\'utilisation','trim|xss_clean');
         $this->form_validation->set_rules('date','Date de naissance','trim|xss_clean|callback_validate_age');
+
+
+
+
         //   $this->form_validation->set_rules('paysorigine','Pays d\'origine','trim|required|min_length[3]|xss_clean');
         //  $this->form_validation->set_rules('villeorigine','Ville d\'origine','trim|required|min_length[3]|xss_clean');
         //  $this->form_validation->set_rules('quartierorigine','Quartier d\'origine','trim|required|min_length[3]|xss_clean');
         $this->form_validation->set_rules('photo','Photo','');
+
+
         //Configuration de propriétés des images uploader
         $config['upload_path'] ='./images/';
         $config['allowed_types']='gif|jpg|jpeg|png';
         $config['max_size']='100000';
         $config['encrypt_name']=true;
+
         $this->load->library('upload',$config);
         $this->upload->initialize($config);
-        
         //Creation de l'utilisateur
-        if($this->input->server('REQUEST_METHOD') === 'POST'){
-                if($this->form_validation->run()){
-                    /*$g_recaptcha_response=trim($this->input->post('g-recaptcha-response'));
+        if($this->input->server('REQUEST_METHOD') === 'POST')
+        {
+
+                if($this->form_validation->run())
+                {
+                    $g_recaptcha_response=trim($this->input->post('g-recaptcha-response'));
+
                     log_message('info',"g-recaptcha-response: ".$g_recaptcha_response);
-                    if($this->getResponse($g_recaptcha_response)){*/
+                    if($this->getResponse($g_recaptcha_response))
+                    {
                         $data['test']='form_validation';
                         $villederesidence=$this->input->post('villederesidence');
                         $paysderesidence='';
+
                         if (strpos($this->input->post('villederesidence'),',') !== false) {
                             $villeresidenceInfo = explode(",", $this->input->post('villederesidence'), 2);
                             $villederesidence = $villeresidenceInfo[0];
                             $paysderesidence=$villeresidenceInfo[1];
                         }
+
                         log_message('info',"Numero de téléphone ".ltrim($this->input->post('indicatiftelephonique'),'0').ltrim($this->input->post('telephone'), '0'));
+
                         $dataUser=array(
                             'CIVILITEUSER'=>$this->input->post('civilite'),
                             'PSEUDOUSER'=>$this->input->post('pseudo'),
@@ -104,7 +131,9 @@ class Signup extends CI_Controller {
                             'DIFFUSIONPARTENAIRE'=>$this->input->post('agreepartenaire'),
                             'TYPE_UTILISATEUR'=>'PART',
                             'VISUNUMEROTEL'=>'1',
+
                         );
+
                         $data['test']='les photo now';
                         //Traitement photo/image uploader par l'utilisateur
                         try
@@ -122,20 +151,25 @@ class Signup extends CI_Controller {
                                     'width'=>150,
                                     'height'=>150
                                 );
+
                                 $this->load->library('image_lib',$config);
                                 $this->image_lib->resize();
                                 $photo_name=$photo_data['file_name'];
                                 $dataP=array(
                                     'CHEMINPHOTO'=>$photo_name,
                                 );
+
                                 try{
                                     //Inscription de l'utilisateur
                                     $this->utilisateur_model->adduser($dataUser,$dataP);
+
                                     //Generation d'un chaine de caractere pour le lien d'activation du compte par mail
                                     $confirm_inscription_by_mail= random_string('alnum', 12);
+
                                     //Generation d'une serie de chiffre pour l'activation par courrier
                                     //$code_confirm_inscription_by_courrier = str_pad(rand(0, 9999), 6, '0', STR_PAD_LEFT);
                                     /* $code_confirm_inscription_by_courrier = substr(number_format(time() * rand(),0,'',''),0,6);
+
                                      $dataconfirmcourier['codeactivation']=$code_confirm_inscription_by_courrier;
                                      $dataconfirmcourier['nom']=$this->input->post('nom');
                                      $dataconfirmcourier['prenom']=$this->input->post('prenom');
@@ -144,27 +178,34 @@ class Signup extends CI_Controller {
                                      $dataconfirmcourier['civilite']=$this->input->post('civilite');
                                      $dataconfirmcourier['codepostale']=$this->input->post('codepostal');
                                      $datestring = "%d  %m %Y";
+
                                      $dataconfirmcourier['date']=mdate($datestring, time());
                                      $html = $this->load->view('courrier', $dataconfirmcourier, true);
                                      pdf_create($html, $this->input->post('nom').'_'.$this->input->post('prenom'), false);*/
+
+
                                     //Insertion des  chaine de caracteres genere dans  les champ 'CONFIRMINSCRIPTION' et 'CONFIRINSCRIPTIONCOURIER de la table utilisateur
                                     $data = array(
                                         'CONFIRMINSCRIPTIONEMAIL' => $confirm_inscription_by_mail,
                                         'CONFIRMINSCRIPTIONCOURRIER'=>''
                                     );
                                     $this->utilisateur_model->set_confirm_inscription($this->input->post('email'),$data);
+
+
                                     //Envoi de l'email pour confirmation compte
                                     $data_mail['nom']=$this->input->post("nom");
                                     $data_mail['prenom']=$this->input->post("prenom");
                                     $data_mail['confirm_inscription_by_mail']=$confirm_inscription_by_mail;
                                     $data_mail['email']=$this->input->post("email");
                                     $data_mail['motdepasse']=$this->input->post("motdepasse");
+
                                     $this->send_mail('support@kukkea.com',$this->input->post('email'),'Activation compte sur kukkea.com',$this->load->view('email/activate_account_email',$data_mail,true));
+
                                     $data['success']='Inscription réussie!.';
                                     $data['titre']='Inscription';
                                     $this->load->view('includes/header',$data);
-                                    $this->load->view('includes/navbar_view',$data);
-                                    $this->load->view('signup_view',$data);
+                                    $this->load->view('includes/menu_page_no_log',$data);
+                                    $this->load->view('signup',$data);
                                     $this->load->view('includes/footer');
                                 }catch(mysqli_sql_exception $e)
                                 {
@@ -172,6 +213,7 @@ class Signup extends CI_Controller {
                                     $this->session->set_flashdata('erreurdatabase', 'Une erreur est survenue lors de votre inscription');
                                     redirect('signup');
                                 }
+
                             }else
                             {
                                 $data['titre']='Inscription';
@@ -179,8 +221,8 @@ class Signup extends CI_Controller {
                                 $data['error_upload']=$this->upload->display_errors('','');
                                 /*$data['pays']= $this->pays_model->read();*/
                                 $this->load->view('includes/header',$data);
-                                $this->load->view('includes/navbar_view',$data);
-                                $this->load->view('signup_view',$data);
+                                $this->load->view('includes/menu_page_no_log',$data);
+                                $this->load->view('signup',$data);
                                 $this->load->view('includes/footer');
                             }
                         }
@@ -188,37 +230,50 @@ class Signup extends CI_Controller {
                             log_message('info','L\'erreur ' +$e+ ' est survenue');
                             $this->session->set_flashdata('erreurinscription', 'Une erreur est survenue lors de votre inscription');
                             redirect('signup');
+
                         }
+
+
                     }
-                  /* else
+                   else
                         {
                             $data['erreurcaptcha']='Nous ne parvenons pas à verifier votre identité. Assurez-vous d\'avoir coché le captcha en fin de formulaire';
                             $this->load->view('includes/header',$data);
-                            $this->load->view('includes/navbar_view',$data);
-                            $this->load->view('signup_view',$data);
+                            $this->load->view('includes/menu_page_no_log',$data);
+                            $this->load->view('signup',$data);
                             $this->load->view('includes/footer');
                         }
-                }*/
+
+                }
+
                 else
                 {
+
                     $data['titre']='Inscription';
                     $data['error_upload']=$this->upload->display_errors('','');
                     /*$data['pays']= $this->pays_model->read();*/
                     $data['error']='Verifier les champs du formulaire';
                     $this->load->view('includes/header',$data);
-                    $this->load->view('includes/navbar_view',$data);
-                    $this->load->view('signup_view',$data);
+                    $this->load->view('includes/menu_page_no_log',$data);
+                    $this->load->view('signup',$data);
                     $this->load->view('includes/footer');
+
+
+
             }
         }
         else{
+
             /*$data['pays']= $this->pays_model->read();*/
             $this->load->view('includes/header');
-            $this->load->view('includes/navbar_view');
-            $this->load->view('signup_view');
+            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('signup');
             $this->load->view('includes/footer');
         }
+
+
     }
+
 
     public function adduser_pro()
 
@@ -360,6 +415,103 @@ class Signup extends CI_Controller {
 
         }
     }
+    public $user=null;
+
+    function login()
+    {
+        if($this->session->userdata('login')|| $this->session->userdata('logged') )
+        {
+            redirect('signup/membres');
+        }
+
+        // Facebook Login Url
+        $data['login_url'] = $this->facebook->getLoginUrl();
+
+        $this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
+        $this->form_validation->set_rules('motdepasse','Mot de passe','trim|required|xss_clean');
+
+        if($this->form_validation->run())
+        {
+            if($this->signup_model->check_id($this->input->post('email'), $this->input->post('motdepasse')) &&  $this->signup_model->check_confirm_inscription($this->input->post('email')))
+            {
+
+                /*get number announce post by user*/
+              //  $id_user=$this->utilisateur_model->get_id_user_by_email($this->input->post('email'));
+              //  $number_annonce=$this->annonce_model->get_number_annonce_user_by_id($id_user);
+                /*end get*/
+
+              /*  if($this->signup_model->check_confirm_inscription_courrier($this->input->post('email')) || $number_annonce<2){*/
+
+                    $dataUser=$this->signup_model->get_nom_prenom_user_by_email($this->input->post('email'));
+
+                    if($dataUser!= null)
+                    {
+                        $data=array('login'=>$this->input->post('email'),
+                            'logged'=>true);
+
+                    }
+
+                    //Variable de log
+                    $data_u=array(
+                        'DERNIERECONNEXION'=>date('Y-m-d H:i:s', now())
+                    );
+                    $this->signup_model->update_last_connexion($this->input->post('email'),$data_u);
+                    //end logging connexion time
+
+
+                    $this->session->set_userdata($data);
+
+                    /* Redirection previous page after authentication */
+                   /* $this->session->set_userdata('refered_from', $_SERVER['HTTP_REFERER']);*/
+                   /* redirect($this->session->userdata('refered_from'));*/
+                    /*if($this->session->userdata('page_url'))
+                        redirect($this->session->userdata('page_url'));
+                    else*/
+                        redirect('signup/membres');
+
+                    //redirect('signup/membres');
+               /* }
+                else
+                {
+                    $this->load->view('includes/header');
+                    $this->load->view('includes/menu_page_no_log');
+                    $this->load->view('code_confirmation');
+                    $this->load->view('includes/footer');
+                }*/
+
+            }
+            else
+            {
+                $data['error']='Mauvais identifiants';
+                $data['titre']='Connexion';
+                // $data['fblogin'] = $this->facebook->get_login_url();
+
+
+                $this->load->view('includes/header');
+                $this->load->view('includes/menu_page_no_log');
+                $this->load->view('login',$data);
+                $this->load->view('includes/footer');
+
+            }
+        }
+        else
+        {
+
+            $data['titre']='Connexion';
+            //Google Auth
+            // Store values in variables from project created in Google Developer Console
+          /* */
+
+            // Create Client Request to access Google API
+
+            $this->load->view('includes/header');
+            $this->load->view('includes/menu_page_no_log');
+            $this->load->view('login',$data);
+            $this->load->view('includes/footer');
+
+        }
+
+    }
 
     function google()
     {
@@ -400,6 +552,76 @@ class Signup extends CI_Controller {
         }
     }
 
+    function facebook()
+    {
+
+    }
+
+    function logout()
+    {
+        $this->session->unset_userdata('login');
+        $this->session->unset_userdata('logged');
+        redirect(site_url());
+    }
+
+    function membres()
+    {
+        if(!$this->session->userdata('login') || !$this->session->userdata('logged'))
+        {
+            redirect('signup/login');
+        }
+        else
+        {
+
+
+
+            $idUser=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
+            log_message('info','On recupere id user succes');
+
+
+            $data['iduser']=encryptor('encrypt', $idUser);
+            log_message('info','cryptage id user');
+
+
+            $id_user_connecte=$this->utilisateur_model->get_id_user_by_email($this->session->userdata('login'));
+            log_message('info','lon recupere les info de l\'user connecte');
+
+
+            $data['user_connecte_info']=$this->utilisateur_model->get_user_info_by_id($id_user_connecte);
+            log_message('info','on set l"array pour affichage à la vue');
+
+
+            $data['number_annonce_user_connecte']=$this->annonce_model->get_number_annonce_user_by_id($id_user_connecte);
+            $data['average_avis']=round($this->avis_model->get_avg_avis($idUser),1);
+            $data['nombre_avis']=$this->avis_model->get_number_avis($idUser);
+            $data['statut_confirm_by_phone']='true';
+
+            if($this->signup_model->check_confirm_inscription_phone($this->session->userdata('login'))){
+                $data['statut_confirm_by_phone']='true';
+            }else{
+                $data['statut_confirm_by_phone']='false';
+            }
+            log_message('info','On verifie que son numéro est bien actif');
+
+            $data['toutes_mes_annonces']=$this->annonce_model->get_all_annonce_by_user($id_user_connecte);
+            log_message('info','On recupere toutes les annonce');
+
+            $data['toutes_mes_annonces_transport']=$this->annonce_model->get_all_annonce_transport_by_user($id_user_connecte);
+            log_message('info','On recupere toutes les annonce de transport');
+
+            $data['toutes_mes_annonces_envoi']=$this->annonce_model->get_all_annonce_envoi_by_user($id_user_connecte);
+            log_message('info','On recupere toutes les annonce de transport');
+
+
+            $data['alertes']='';
+            $data['titre']='Zone Reservé au membres';
+            $this->load->view('includes/header');
+            $this->load->view('includes/menu_page_log',$data);
+            $this->load->view('membres',$data);
+            $this->load->view('includes/footer');
+
+        }
+    }
 
     //fonction de callback pour checker l'email
 
@@ -509,9 +731,14 @@ class Signup extends CI_Controller {
         }
 
         $this->load->view('includes/header');
-        $this->load->view('includes/navbar_view',$data);
+        $this->load->view('includes/menu_page_no_log',$data);
         $this->load->view('code_confirmation',$data);
         $this->load->view('includes/footer');
+    }
+
+    public function fblogin() {
+        $login_url = $this->facebook->get_login_url();
+
     }
 
     public function send_mail($from,$to,$subject, $message)
@@ -618,5 +845,8 @@ class Signup extends CI_Controller {
 
         return true;
     }
+
+
+
 
 }

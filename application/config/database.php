@@ -50,8 +50,8 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'bebefranky1#';
-$db['default']['database'] = 'kukkea';
+$db['default']['password'] = '';
+$db['default']['database'] = 'kukkea_dev';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

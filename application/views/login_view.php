@@ -58,18 +58,18 @@
                         <?php endif; ?>
                         <?php
                         $attribute=array('class'=>' form-horizontal','id'=>'login-form-id','role'=>'form');
-                        echo form_open('signup/login',$attribute); ?>
+                        echo form_open('auth/validate',$attribute); ?>
                         <div class="row 50%">
                             <?php echo form_error('email','<span class="error">','</span>');?>
                             <label class="col-sm-4 6u 12u(mobile)"  for="email">Email:</label>
-                            <div class=" 6u 12u(mobile)"">
+                            <div class=" 6u 12u(mobile)">
                                  <input class="validate[required,custom[email]] text-input " type="text"  placeholder="Adresse email" name="email" value="<?php echo set_value('email');?>"/>
                             </div>
                         </div>
                         <div class="row 50%">
                             <?php echo form_error('motdepasse','<span class="error">','</span>');?>
                             <label class="col-sm-4 6u 12u(mobile)" for="motdepasse" >Mot de passe:</label>
-                           <div class="6u 12u(mobile)"">
+                           <div class="6u 12u(mobile)">
                                 <input class="validate[required,length[6,12],custom[passwordLength]] text-input" type="password" class="form-control" placeholder="Mot de passe" name="motdepasse" value="<?php  echo set_value('motdepasse');?>"/>
                            </div>
                         </div>
@@ -144,7 +144,7 @@
         </div>
             <br/>
 </div>
-    </section>
+</section>
 </article>
 
     <script src="<?=base_url('js/jquery.js'); ?>"></script>

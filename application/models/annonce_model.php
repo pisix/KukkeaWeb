@@ -55,15 +55,20 @@ class Annonce_model  extends CI_Model{
         $this->db->insert('annonces',$data);
     }
 
-    function get_number_annonce_user_by_id($id)
-    {
-        $this->db->select('utilisateur.*, COUNT(annonces.NUMANNONCE)')
-            ->from('utilisateur');
-
-        $this->db->join('annonces', 'annonces.NUMUSER = utilisateur.NUMUSER');
-
-        $this->db->where('annonces.NUMUSER',$id)
-            ->group_by('annonces.NUMUSER');
+    function get_number_annonce_user_by_id($id, $type_connexion){
+        if($type_connexion == "N"){
+            $this->db->select('utilisateur.*, COUNT(annonces.NUMANNONCE)')
+                ->from('utilisateur');
+            $this->db->join('annonces', 'annonces.NUMUSER = utilisateur.NUMUSER');
+            $this->db->where('annonces.NUMUSER',$id)
+                ->group_by('annonces.NUMUSER');
+        }else{ // fbk user annonces
+            $this->db->select('utilisateursfbk.*, COUNT(annonces.NUMANNONCE)')
+                ->from('utilisateursfbk');
+            $this->db->join('annonces', 'annonces.NUMFBKUSER = utilisateursfbk.NUMFBKUSER');
+            $this->db->where('annonces.NUMFBKUSER',$id)
+                ->group_by('annonces.NUMFBKUSER');
+        }
 
         $q=$this->db->count_all_results();
         return $q;
@@ -589,16 +594,20 @@ class Annonce_model  extends CI_Model{
     }
 
 
-    function get_all_annonce_by_user($idUser)
-    {
-        $this->db->select('utilisateur.*, annonces.*,photo.*, annonces.NOMVILLEARRIVEE,  annonces.NOMVILLEDEPART')
-            ->from('utilisateur');
-
-        $this->db->join('annonces', 'annonces.NUMUSER = utilisateur.NUMUSER');
-        $this->db->join('photo','photo.IDPHOTO=utilisateur.IDPHOTO');
-      
-
-        $this->db->where('annonces.NUMUSER',$idUser);
+    function get_all_annonce_by_user($idUser, $type_connexion){
+        if($type_connexion == "N"){
+            $this->db->select('utilisateur.*, annonces.*,photo.*, annonces.NOMVILLEARRIVEE,  annonces.NOMVILLEDEPART')
+                     ->from('utilisateur');
+            $this->db->join('annonces', 'annonces.NUMUSER = utilisateur.NUMUSER');
+            $this->db->join('photo','photo.IDPHOTO=utilisateur.IDPHOTO');
+            $this->db->where('annonces.NUMUSER',$idUser);
+        }else{
+            $this->db->select('utilisateursfbk.*, annonces.*,photo.*, annonces.NOMVILLEARRIVEE,  annonces.NOMVILLEDEPART')
+                     ->from('utilisateursfbk');
+            $this->db->join('annonces', 'annonces.NUMFBKUSER = utilisateursfbk.NUMFBKUSER');
+            $this->db->join('photo','photo.IDPHOTO=utilisateursfbk.IDPHOTO');
+            $this->db->where('annonces.NUMFBKUSER',$idUser);
+        }
 
         $q=$this->db->get();
         if($q->num_rows()>0)
@@ -611,14 +620,20 @@ class Annonce_model  extends CI_Model{
         }
     }
 
-    function get_all_annonce_transport_by_user($idUser)
-    {
-        $this->db->select('utilisateur.*, annonces.*,photo.*')
-            ->from('utilisateur');
-
-        $this->db->join('annonces', 'annonces.NUMUSER = utilisateur.NUMUSER');
-        $this->db->join('photo','photo.IDPHOTO=utilisateur.IDPHOTO');
-        $this->db->where('annonces.NUMUSER',$idUser);
+    function get_all_annonce_transport_by_user($idUser, $type_connexion){
+        if($type_connexion == "N"){
+            $this->db->select('utilisateur.*, annonces.*,photo.*')
+                     ->from('utilisateur');
+            $this->db->join('annonces', 'annonces.NUMUSER = utilisateur.NUMUSER');
+            $this->db->join('photo','photo.IDPHOTO=utilisateur.IDPHOTO');
+            $this->db->where('annonces.NUMUSER',$idUser);
+        }else{
+            $this->db->select('utilisateursfbk.*, annonces.*,photo.*')
+                     ->from('utilisateursfbk');
+            $this->db->join('annonces', 'annonces.NUMFBKUSER = utilisateursfbk.NUMFBKUSER');
+            $this->db->join('photo','photo.IDPHOTO=utilisateursfbk.IDPHOTO');
+            $this->db->where('annonces.NUMFBKUSER',$idUser);
+        }
         $this->db->where('annonces.TYPE_ANNONCE','Transport');
 
         $q=$this->db->get();
@@ -693,19 +708,22 @@ class Annonce_model  extends CI_Model{
 
 
 
-    function get_all_annonce_envoi_by_user($idUser)
-    {
-        $this->db->select('utilisateur.*, annonces.*, photo.*')
-            ->from('utilisateur');
-
-        $this->db->join('annonces', 'annonces.NUMUSER = utilisateur.NUMUSER');
-        $this->db->join('photo','photo.IDPHOTO=utilisateur.IDPHOTO');
-       
-
-
-
-
-        $this->db->where('annonces.NUMUSER',$idUser);
+    function get_all_annonce_envoi_by_user($idUser, $type_connexion, $user_model){
+        if($type_connexion == "N"){
+            $this->db->select('utilisateur.*, annonces.*, photo.*')
+                ->from('utilisateur');
+            $this->db->join('annonces', 'annonces.NUMUSER = utilisateur.NUMUSER');
+            $this->db->join('photo','photo.IDPHOTO=utilisateur.IDPHOTO');
+            $this->db->where('annonces.NUMUSER',$idUser);
+            $numuser = "NUMUSER";
+        }else{
+            $this->db->select('utilisateursfbk.*, annonces.*, photo.*')
+                ->from('utilisateursfbk');
+            $this->db->join('annonces', 'annonces.NUMFBKUSER = utilisateursfbk.NUMFBKUSER');
+            $this->db->join('photo','photo.IDPHOTO=utilisateursfbk.IDPHOTO');
+            $this->db->where('annonces.NUMFBKUSER',$idUser);
+            $numuser = "NUMFBKUSER";
+        }
         $this->db->where('annonces.TYPE_ANNONCE','Envoi');
 
         $q=$this->db->get();
@@ -713,7 +731,7 @@ class Annonce_model  extends CI_Model{
         {
             foreach($q->result() as $row)
             {
-                $experience=$this->utilisateur_model->get_experience($row->NUMUSER);
+                $experience=$this->$user_model->get_experience($row->$numuser);
                 $date['EXPERIENCE']=$experience;
                 $data[]=$row;
             }
