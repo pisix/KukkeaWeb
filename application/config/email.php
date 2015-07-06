@@ -3,13 +3,6 @@
 //$config['smtp_host']=null;
 //$config['smtp_port']=null;
 
-//$config['username']='leundeufranky@gmail.com';
-//$config['password']='BEBEFRANKY1#';
-/*$config['protocol'] = 'smtp';
-$config['smtp_host'] = 'ssl0.ovh.net';
-$config['smtp_port'] = 25;
-$config['smtp_user'] = 'admin@kuuzashop.com';
-$config['smtp_pass'] = 'ADMINshop123';*/
 
 $config['protocol'] = "###";
 $config['smtp_host'] = "###";
